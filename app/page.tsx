@@ -301,7 +301,7 @@ const FlashcardDemo = () => {
                   Lasting for a very short time.
                 </div>
                 <div className="text-lg font-medium text-[#0f0e0e]/80 italic bg-white/20 p-4 rounded-xl border-2 border-[#0f0e0e]">
-                  "The viral meme's fame was ephemeral, forgotten within a week."
+                  &ldquo;The viral meme&apos;s fame was ephemeral, forgotten within a week.&rdquo;
                 </div>
               </div>
             </motion.div>

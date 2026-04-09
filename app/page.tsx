@@ -34,9 +34,9 @@ const NavBar = () => {
           <Link href="#vocab" className="hover:underline decoration-2 underline-offset-4">Vocab Builder</Link>
         </div>
         <div className="flex gap-4 items-center">
-          <Link href="/auth" className="font-bold text-sm hover:opacity-70 transition-opacity">Log in</Link>
+          <Link href="https://learn.ronansat.com/auth" className="font-bold text-sm hover:opacity-70 transition-opacity">Log in</Link>
           <Link 
-            href="/auth" 
+            href="https://learn.ronansat.com/auth" 
             className="bg-[#0f0e0e] text-[#f4efe6] px-5 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform brutal-shadow-sm border-2 border-[#0f0e0e]"
           >
             Start Free
@@ -108,7 +108,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-12 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
-            <Link href="/auth" className="group relative w-full sm:w-auto">
+            <Link href="https://learn.ronansat.com/auth" className="group relative w-full sm:w-auto">
               <div className="absolute inset-0 bg-[#0f0e0e] rounded-2xl translate-x-2 translate-y-2 transition-transform group-hover:translate-x-3 group-hover:translate-y-3"></div>
               <div className="relative flex items-center justify-center gap-2 bg-[#D9FF42] border-4 border-[#0f0e0e] px-8 py-5 rounded-2xl text-xl font-bold font-display uppercase tracking-wide transition-transform group-hover:-translate-y-1 group-hover:-translate-x-1">
                 Start Practicing
@@ -326,7 +326,7 @@ const CTASection = () => {
           <p className="text-xl md:text-2xl font-medium text-white/90 mb-12 max-w-2xl mx-auto">
             Join thousands of students who traded boring textbooks for a study platform they actually want to use.
           </p>
-          <Link href="/auth" className="group relative inline-block">
+          <Link href="https://learn.ronansat.com/auth" className="group relative inline-block">
             <div className="absolute inset-0 bg-[#0f0e0e] rounded-2xl translate-x-2 translate-y-2 transition-transform group-hover:translate-x-3 group-hover:translate-y-3"></div>
             <div className="relative flex items-center justify-center gap-2 bg-[#D9FF42] border-4 border-[#0f0e0e] px-10 py-6 rounded-2xl text-2xl font-bold font-display uppercase tracking-wide transition-transform group-hover:-translate-y-1 group-hover:-translate-x-1">
               Start Your Free Trial

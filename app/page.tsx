@@ -1,509 +1,399 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BarChart3,
+import { motion } from "framer-motion";
+import { 
+  ArrowRight, 
+  Brain, 
+  Trophy, 
+  Target, 
+  Sparkles, 
+  Clock, 
   BookOpen,
-  Brain,
-  ChartColumnIncreasing,
-  Clock3,
-  Goal,
-  Layers3,
-  Medal,
-  MessageSquareQuote,
-  ScanSearch,
-  Sparkles,
-  Target,
-  Trophy,
+  Zap,
+  CheckCircle2
 } from "lucide-react";
 
-const productHighlights = [
-  {
-    title: "Test-day simulation",
-    description: "Sit down to a full Digital SAT flow that feels calm, focused, and real.",
-    icon: Clock3,
-    tone: "from-[#ffb480] to-[#ff8f67]",
-  },
-  {
-    title: "Precision analytics",
-    description: "See pacing, topic mastery, misses, and score movement without digging.",
-    icon: ChartColumnIncreasing,
-    tone: "from-[#d7ff79] to-[#96df52]",
-  },
-  {
-    title: "Vocabulary builder",
-    description: "Turn weak words into repeat wins with fast review loops and memory cues.",
-    icon: BookOpen,
-    tone: "from-[#95d7ff] to-[#5d9cff]",
-  },
-];
+const NavBar = () => {
+  return (
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className="fixed top-0 left-0 right-0 z-50 p-4 pointer-events-none"
+    >
+      <div className="max-w-7xl mx-auto flex justify-between items-center bg-[#f4efe6]/90 backdrop-blur-md border-2 border-[#0f0e0e] rounded-2xl px-6 py-4 brutal-shadow-sm pointer-events-auto">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-[#D9FF42] rounded-full border-2 border-[#0f0e0e] flex items-center justify-center">
+            <Zap className="w-4 h-4 text-[#0f0e0e] fill-current" />
+          </div>
+          <span className="font-display font-bold text-xl tracking-tight uppercase">Ronan SAT</span>
+        </div>
+        <div className="hidden md:flex gap-6 font-medium text-sm">
+          <Link href="#features" className="hover:underline decoration-2 underline-offset-4">Features</Link>
+          <Link href="#vocab" className="hover:underline decoration-2 underline-offset-4">Vocab Builder</Link>
+        </div>
+        <div className="flex gap-4 items-center">
+          <Link href="/auth" className="font-bold text-sm hover:opacity-70 transition-opacity">Log in</Link>
+          <Link 
+            href="/auth" 
+            className="bg-[#0f0e0e] text-[#f4efe6] px-5 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform brutal-shadow-sm border-2 border-[#0f0e0e]"
+          >
+            Start Free
+          </Link>
+        </div>
+      </div>
+    </motion.nav>
+  );
+};
 
-const workflow = [
-  {
-    title: "Take a realistic drill",
-    text: "Practice in a room that mirrors the real exam instead of a clunky worksheet.",
-    icon: ScanSearch,
-  },
-  {
-    title: "Review what actually matters",
-    text: "Ronan SAT surfaces weak concepts, timing leaks, and mistake patterns instantly.",
-    icon: Brain,
-  },
-  {
-    title: "Climb with visible momentum",
-    text: "Dashboards, streaks, leaderboards, and milestones make progress feel tangible.",
-    icon: Trophy,
-  },
-];
+const HeroSection = () => {
+  return (
+    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-grid-pattern">
+      <motion.div 
+        animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }} 
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-32 left-10 md:left-20 w-32 h-32 bg-[#FF82A9] rounded-full border-4 border-[#0f0e0e] brutal-shadow mix-blend-multiply flex items-center justify-center -z-10"
+      >
+        <Sparkles className="w-12 h-12 text-[#0f0e0e]" />
+      </motion.div>
 
-const boardItems = [
-  { label: "Adaptive drills", rotate: "rotate-[-2deg]", tone: "bg-[#ffd6c9]" },
-  { label: "Leaderboards", rotate: "rotate-[2deg]", tone: "bg-[#d9f0ff]" },
-  { label: "Reading breakdowns", rotate: "rotate-[-2deg]", tone: "bg-[#f4efea]" },
-  { label: "Math skill map", rotate: "rotate-[2deg]", tone: "bg-[#ffd6c9]" },
-  { label: "Timed sections", rotate: "rotate-[-2deg]", tone: "bg-[#d9f0ff]" },
-  { label: "Smart vocab review", rotate: "rotate-[2deg]", tone: "bg-[#f4efea]" },
-];
+      <motion.div 
+        animate={{ y: [0, 30, 0], rotate: [0, -10, 0] }} 
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-40 right-10 md:right-20 w-40 h-40 bg-[#D9FF42] border-4 border-[#0f0e0e] rounded-3xl brutal-shadow mix-blend-multiply flex items-center justify-center -z-10"
+      >
+         <Target className="w-16 h-16 text-[#0f0e0e]" />
+      </motion.div>
 
-const metrics = [
-  { value: "1600", label: "clear ceiling to chase" },
-  { value: "40+", label: "topic signals per session" },
-  { value: "<10m", label: "to start a focused drill" },
-];
+      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+        <div className="flex flex-col items-center text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", bounce: 0.5 }}
+            className="inline-flex items-center gap-2 bg-white border-2 border-[#0f0e0e] px-4 py-2 rounded-full mb-8 brutal-shadow-sm rotate-[-2deg]"
+          >
+             <span className="w-3 h-3 rounded-full bg-[#FF6B35] animate-pulse"></span>
+             <span className="font-bold text-sm uppercase tracking-wider">Not your average prep course</span>
+          </motion.div>
 
-const suiteCards = [
-  {
-    icon: BarChart3,
-    title: "Performance dashboard",
-    text: "Every session becomes visible progress with skill-by-skill movement.",
-  },
-  {
-    icon: Goal,
-    title: "Targeted recovery",
-    text: "Missed concepts become focused repair drills instead of vague goals.",
-  },
-  {
-    icon: MessageSquareQuote,
-    title: "Detailed explanations",
-    text: "Students see the why behind every answer, not just green and red dots.",
-  },
-  {
-    icon: Medal,
-    title: "Leaderboard energy",
-    text: "Accountability and friendly competition keep momentum high.",
-  },
-];
+          <motion.h1 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-[4rem] md:text-[7rem] leading-[0.9] font-display font-black tracking-tighter text-balance uppercase"
+          >
+            Hate Studying?<br/>
+            <span className="text-outline">We Made It</span><br/>
+            <span className="relative inline-block mt-2">
+              <span className="relative z-10 bg-[#4287FF] text-white px-6 py-2 border-4 border-[#0f0e0e] rounded-2xl brutal-shadow-lg inline-block transform rotate-2">
+                Addicting.
+              </span>
+            </span>
+          </motion.h1>
 
-const testimonials = [
-  {
-    quote: '"I knew what to do next every single time."',
-    text: "The dashboard made my weak spots obvious instead of overwhelming.",
-    label: "Student note",
-  },
-  {
-    quote: '"The leaderboard made prep weirdly fun."',
-    text: "It added just enough pressure to keep me consistent through the week.",
-    label: "Momentum note",
-  },
-  {
-    quote: '"Review felt smarter than rereading old mistakes."',
-    text: "I could jump from a missed question directly into the concept that caused it.",
-    label: "Review note",
-  },
-  {
-    quote: '"It looks premium without feeling intimidating."',
-    text: "That balance matters when you want students to start immediately.",
-    label: "Parent note",
-  },
-];
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-10 text-xl md:text-2xl max-w-2xl font-medium text-[#0f0e0e]/80 text-balance"
+          >
+            Full test simulations, aggressive analytics, and a vocabulary builder that feels like a game. Crush the SAT without losing your mind.
+          </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-12 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+          >
+            <Link href="/auth" className="group relative w-full sm:w-auto">
+              <div className="absolute inset-0 bg-[#0f0e0e] rounded-2xl translate-x-2 translate-y-2 transition-transform group-hover:translate-x-3 group-hover:translate-y-3"></div>
+              <div className="relative flex items-center justify-center gap-2 bg-[#D9FF42] border-4 border-[#0f0e0e] px-8 py-5 rounded-2xl text-xl font-bold font-display uppercase tracking-wide transition-transform group-hover:-translate-y-1 group-hover:-translate-x-1">
+                Start Practicing
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+            <Link href="#features" className="group relative w-full sm:w-auto">
+              <div className="absolute inset-0 bg-[#0f0e0e] rounded-2xl translate-x-2 translate-y-2 transition-transform group-hover:translate-x-3 group-hover:translate-y-3"></div>
+              <div className="relative flex items-center justify-center bg-white border-4 border-[#0f0e0e] px-8 py-5 rounded-2xl text-xl font-bold font-display uppercase tracking-wide transition-transform group-hover:-translate-y-1 group-hover:-translate-x-1">
+                See Features
+              </div>
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const StarIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+  </svg>
+);
+
+const MarqueeSection = () => {
+  return (
+    <div className="bg-[#0f0e0e] text-[#D9FF42] py-6 border-y-4 border-[#0f0e0e] flex overflow-hidden whitespace-nowrap -rotate-2 scale-105 origin-center relative z-20">
+      <div className="marquee-content font-display font-black text-4xl uppercase tracking-widest flex items-center">
+        {Array.from({ length: 10 }).map((_, i) => (
+          <span key={i} className="flex items-center">
+            <span className="mx-8">Score Higher</span>
+            <StarIcon />
+            <span className="mx-8">Study Smarter</span>
+            <StarIcon />
+            <span className="mx-8">Beat The Test</span>
+            <StarIcon />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const BentoFeatures = () => {
+  return (
+    <section id="features" className="py-32 px-6 max-w-7xl mx-auto">
+      <div className="mb-16">
+        <h2 className="text-5xl md:text-7xl font-display font-black uppercase tracking-tight text-balance">
+          We rebuilt prep <br/> <span className="text-[#4287FF] text-outline" style={{ WebkitTextStroke: "2px #0f0e0e" }}>from the ground up.</span>
+        </h2>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+        <motion.div 
+          whileHover={{ y: -5 }}
+          className="md:col-span-2 bg-[#FF6B35] rounded-3xl border-4 border-[#0f0e0e] brutal-shadow p-8 flex flex-col justify-between overflow-hidden relative group"
+        >
+          <div className="relative z-10">
+            <div className="bg-white border-2 border-[#0f0e0e] p-3 rounded-full inline-flex brutal-shadow-sm mb-6">
+              <Clock className="w-6 h-6 text-[#0f0e0e]" />
+            </div>
+            <h3 className="text-3xl md:text-4xl font-display font-black text-[#0f0e0e] uppercase">Test-Day Simulation</h3>
+            <p className="mt-4 text-lg text-[#0f0e0e]/90 font-medium max-w-md">
+              Sit down to a full Digital SAT flow that feels calm, focused, and exactly like the real thing. No surprises on test day.
+            </p>
+          </div>
+          <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-white/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+        </motion.div>
+
+        <motion.div 
+          whileHover={{ y: -5 }}
+          className="bg-white rounded-3xl border-4 border-[#0f0e0e] brutal-shadow p-8 flex flex-col justify-between"
+        >
+          <div>
+             <div className="bg-[#4287FF] border-2 border-[#0f0e0e] p-3 rounded-full inline-flex brutal-shadow-sm mb-6">
+              <Trophy className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="text-3xl font-display font-black text-[#0f0e0e] uppercase">Leaderboards</h3>
+            <p className="mt-4 text-base font-medium text-gray-700">
+              Friendly competition. Climb the ranks as you master new concepts.
+            </p>
+          </div>
+          <div className="mt-6 flex items-end gap-2 h-20">
+            <div className="w-1/3 bg-[#f4efe6] h-[40%] rounded-t-xl border-x-2 border-t-2 border-[#0f0e0e]"></div>
+            <div className="w-1/3 bg-[#FF82A9] h-[80%] rounded-t-xl border-x-2 border-t-2 border-[#0f0e0e]"></div>
+            <div className="w-1/3 bg-[#D9FF42] h-[100%] rounded-t-xl border-x-2 border-t-2 border-[#0f0e0e]"></div>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          whileHover={{ y: -5 }}
+          className="bg-[#D9FF42] rounded-3xl border-4 border-[#0f0e0e] brutal-shadow p-8 flex flex-col justify-between"
+        >
+          <div>
+            <div className="bg-white border-2 border-[#0f0e0e] p-3 rounded-full inline-flex brutal-shadow-sm mb-6">
+              <Brain className="w-6 h-6 text-[#0f0e0e]" />
+            </div>
+            <h3 className="text-3xl font-display font-black text-[#0f0e0e] uppercase">Precision Analytics</h3>
+            <p className="mt-4 text-base font-medium text-gray-800">
+              See pacing, topic mastery, and exact miss patterns instantly.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          whileHover={{ y: -5 }}
+          className="md:col-span-2 bg-[#0f0e0e] rounded-3xl border-4 border-[#0f0e0e] brutal-shadow p-8 flex flex-col md:flex-row justify-between items-center text-[#f4efe6] overflow-hidden relative"
+        >
+           <div className="relative z-10 md:w-1/2">
+            <div className="bg-[#FF82A9] border-2 border-[#FF82A9] p-3 rounded-full inline-flex mb-6">
+              <BookOpen className="w-6 h-6 text-[#0f0e0e]" />
+            </div>
+            <h3 className="text-3xl md:text-4xl font-display font-black uppercase text-white">Smart Vocab Builder</h3>
+            <p className="mt-4 text-lg text-gray-300 font-medium">
+              Turn weak words into repeat wins with fast review loops and memory cues that actually stick.
+            </p>
+          </div>
+          <div className="mt-8 md:mt-0 relative z-10 w-full md:w-auto flex justify-center perspective-1000">
+            <motion.div 
+              animate={{ rotateY: [0, 360] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              className="w-48 h-64 bg-white border-4 border-[#f4efe6] rounded-2xl brutal-shadow flex items-center justify-center p-6 text-center transform-style-3d text-[#0f0e0e]"
+            >
+              <div>
+                <span className="font-display font-bold text-2xl border-b-2 border-black/10 pb-2">Obfuscate</span>
+                <p className="mt-4 text-sm font-medium text-gray-600 italic">(verb) to render obscure, unclear, or unintelligible.</p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const FlashcardDemo = () => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <section id="vocab" className="py-24 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+        <div className="md:w-1/2">
+          <div className="inline-block bg-[#D9FF42] text-[#0f0e0e] px-4 py-1 border-2 border-[#0f0e0e] rounded-full font-bold text-sm uppercase tracking-wider brutal-shadow-sm mb-6 rotate-2">
+            Interactive Demo
+          </div>
+          <h2 className="text-5xl md:text-6xl font-display font-black uppercase tracking-tight text-[#0f0e0e] mb-6">
+            Words that stick.
+          </h2>
+          <p className="text-xl text-gray-700 font-medium mb-8">
+            Stop staring at boring lists. Our vocabulary builder uses spaced repetition and visceral design to sear definitions into your brain.
+          </p>
+          <ul className="space-y-4 mb-10">
+            {["Curated high-frequency SAT words", "Spaced repetition algorithms", "Contextual example sentences"].map((item, i) => (
+              <li key={i} className="flex items-center gap-3 font-medium text-lg">
+                <CheckCircle2 className="w-6 h-6 text-[#FF6B35]" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="md:w-1/2 flex justify-center w-full">
+          <div 
+            className="w-full max-w-sm h-96 cursor-pointer perspective-1000"
+            onClick={() => setIsFlipped(!isFlipped)}
+          >
+            <motion.div
+              className="w-full h-full relative preserve-3d transition-transform duration-700"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+            >
+              {/* Front */}
+              <div className="absolute inset-0 backface-hidden bg-white border-4 border-[#0f0e0e] rounded-3xl brutal-shadow-lg flex flex-col items-center justify-center p-8">
+                <div className="text-6xl font-display font-black text-[#0f0e0e] tracking-tight">
+                  Ephemeral
+                </div>
+                <div className="mt-10 animate-bounce flex items-center gap-2 text-gray-500 font-bold uppercase tracking-widest text-sm">
+                  Click to Flip
+                </div>
+              </div>
+              
+              {/* Back */}
+              <div 
+                className="absolute inset-0 backface-hidden bg-[#FF82A9] border-4 border-[#0f0e0e] rounded-3xl brutal-shadow-lg flex flex-col items-center justify-center p-8 text-center"
+                style={{ transform: "rotateY(180deg)" }}
+              >
+                <div className="text-2xl font-display font-black text-[#0f0e0e] mb-4">
+                  (adjective)
+                </div>
+                <div className="text-3xl font-bold text-white mb-6">
+                  Lasting for a very short time.
+                </div>
+                <div className="text-lg font-medium text-[#0f0e0e]/80 italic bg-white/20 p-4 rounded-xl border-2 border-[#0f0e0e]">
+                  "The viral meme's fame was ephemeral, forgotten within a week."
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CTASection = () => {
+  return (
+    <section className="py-32 px-6">
+      <div className="max-w-5xl mx-auto bg-[#4287FF] border-4 border-[#0f0e0e] rounded-[3rem] brutal-shadow-lg p-12 md:p-24 text-center relative overflow-hidden">
+        <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#D9FF42] rounded-full border-4 border-[#0f0e0e] mix-blend-overlay"></div>
+        <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-[#FF6B35] rotate-45 border-4 border-[#0f0e0e] mix-blend-overlay"></div>
+        
+        <div className="relative z-10">
+          <h2 className="text-5xl md:text-7xl font-display font-black uppercase tracking-tighter text-white mb-8">
+            Ready to <br/><span className="text-[#D9FF42] text-outline" style={{ WebkitTextStroke: "2px #0f0e0e" }}>Destroy</span> the SAT?
+          </h2>
+          <p className="text-xl md:text-2xl font-medium text-white/90 mb-12 max-w-2xl mx-auto">
+            Join thousands of students who traded boring textbooks for a study platform they actually want to use.
+          </p>
+          <Link href="/auth" className="group relative inline-block">
+            <div className="absolute inset-0 bg-[#0f0e0e] rounded-2xl translate-x-2 translate-y-2 transition-transform group-hover:translate-x-3 group-hover:translate-y-3"></div>
+            <div className="relative flex items-center justify-center gap-2 bg-[#D9FF42] border-4 border-[#0f0e0e] px-10 py-6 rounded-2xl text-2xl font-bold font-display uppercase tracking-wide transition-transform group-hover:-translate-y-1 group-hover:-translate-x-1">
+              Start Your Free Trial
+              <Zap className="w-8 h-8 group-hover:rotate-12 transition-transform" />
+            </div>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Footer = () => {
+  return (
+    <footer className="bg-[#0f0e0e] text-[#f4efe6] pt-24 pb-12 px-6 border-t-8 border-[#D9FF42]">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 border-b border-white/20 pb-12">
+        <div className="max-w-sm">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-10 h-10 bg-[#D9FF42] rounded-full flex items-center justify-center">
+              <Zap className="w-5 h-5 text-[#0f0e0e] fill-current" />
+            </div>
+            <span className="font-display font-bold text-3xl tracking-tight uppercase">Ronan SAT</span>
+          </div>
+          <p className="text-gray-400 font-medium text-lg">
+            Score growth, but fun. The SAT study suite for the next generation.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-12 w-full md:w-auto">
+          <div>
+            <h4 className="font-bold uppercase tracking-wider text-gray-500 mb-4">Product</h4>
+            <ul className="space-y-3 font-medium text-lg">
+              <li><Link href="#features" className="hover:text-[#D9FF42] transition-colors">Features</Link></li>
+              <li><Link href="#" className="hover:text-[#D9FF42] transition-colors">Pricing</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold uppercase tracking-wider text-gray-500 mb-4">Resources</h4>
+            <ul className="space-y-3 font-medium text-lg">
+              <li><Link href="#" className="hover:text-[#FF82A9] transition-colors">Blog</Link></li>
+              <li><Link href="#" className="hover:text-[#FF82A9] transition-colors">Support</Link></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto mt-12 flex flex-col md:flex-row justify-between items-center gap-6 font-medium text-gray-500">
+        <p>© {new Date().getFullYear()} Ronan SAT. All rights reserved.</p>
+        <div className="flex gap-6">
+          <Link href="#" className="hover:text-white transition-colors">Twitter</Link>
+          <Link href="#" className="hover:text-white transition-colors">Instagram</Link>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
 export default function Home() {
   return (
-    <div className="app-shell min-h-screen overflow-x-clip text-[#1f1b18]">
-      <header className="sticky top-0 z-50 border-b border-[#1f1b18]/10 bg-[#f6efe3]/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="#top" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-[1.1rem] border-2 border-[#1f1b18] bg-[#d7ff79] shadow-[4px_4px_0_#1f1b18]">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-[#6d625c]">
-                Ronan SAT
-              </p>
-              <p className="[font-family:var(--font-display)] text-xl leading-none">
-                Score growth, but fun
-              </p>
-            </div>
-          </Link>
-          <nav className="hidden items-center gap-6 text-sm font-medium text-[#4f4742] md:flex">
-            <Link href="#features">Features</Link>
-            <Link href="#how-it-works">How it works</Link>
-            <Link href="#results">Results</Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Link
-              href="https://learn.ronansat.com/auth"
-              className="hidden rounded-full border border-[#1f1b18]/15 px-4 py-2 text-sm font-semibold text-[#3d3733] transition hover:-translate-y-0.5 hover:bg-white/70 sm:inline-flex"
-            >
-              Log in
-            </Link>
-            <Link
-              href="https://learn.ronansat.com/auth"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-[#1f1b18] bg-[#1f1b18] px-5 py-2.5 text-sm font-semibold text-[#f8f3eb] shadow-[4px_4px_0_#ff8f67] transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#ff8f67]"
-            >
-              Start free
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </header>
-
-      <main id="top">
-        <section className="relative isolate px-4 pb-14 pt-8 sm:px-6 lg:px-8 lg:pb-24 lg:pt-14">
-          <div className="hero-blur hero-blur-left" />
-          <div className="hero-blur hero-blur-right" />
-          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-            <div className="relative z-10">
-              <div className="sticker mb-8 inline-flex items-center gap-2 bg-[#fff7cf] text-[#4a4037]">
-                <Medal className="h-4 w-4" />
-                Designed for students who want clarity, rhythm, and real score movement
-              </div>
-              <h1 className="max-w-4xl [font-family:var(--font-display)] text-[clamp(4rem,12vw,8.6rem)] leading-[0.88] tracking-[-0.05em] text-[#171412]">
-                The SAT homepage that studies back.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#4b433d] sm:text-xl">
-                Ronan SAT turns prep into a bright, tactile learning system: full exam simulation,
-                leaderboard energy, deep performance analysis, and vocabulary review that students
-                actually want to return to.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <Link
-                  href="https://learn.ronansat.com/auth"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#1f1b18] bg-[#d7ff79] px-7 py-4 text-base font-bold text-[#171412] shadow-[6px_6px_0_#1f1b18] transition hover:-translate-y-1 hover:shadow-[8px_8px_0_#1f1b18]"
-                >
-                  Enter the study suite
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="https://learn.ronansat.com/auth"
-                  className="inline-flex items-center justify-center rounded-full border border-[#1f1b18]/15 bg-white/70 px-7 py-4 text-base font-semibold text-[#3e3834] transition hover:-translate-y-1 hover:bg-white"
-                >
-                  View student login
-                </Link>
-              </div>
-              <div className="mt-10 flex flex-wrap gap-3 text-sm font-semibold text-[#3f3834]">
-                {boardItems.map((item) => (
-                  <span
-                    key={item.label}
-                    className={`inline-flex items-center rounded-full border border-[#1f1b18]/15 px-4 py-2 ${item.rotate} ${item.tone}`}
-                  >
-                    {item.label}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative z-10 lg:pl-8">
-              <div className="floating-card rotate-[-4deg] rounded-[2rem] border-2 border-[#1f1b18] bg-[#fffaf3] p-3 shadow-[10px_10px_0_#1f1b18]">
-                <div className="rounded-[1.5rem] border border-[#1f1b18]/12 bg-[#f8f1e7] p-4">
-                  <div className="mb-4 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#786e68]">
-                        Live dashboard preview
-                      </p>
-                      <p className="mt-1 [font-family:var(--font-display)] text-3xl">Saturday sprint</p>
-                    </div>
-                    <div className="rounded-full border border-[#1f1b18]/10 bg-white px-3 py-1 text-sm font-semibold text-[#4a433d]">
-                      1530 target
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-                    <div className="rounded-[1.5rem] border-2 border-[#1f1b18] bg-[#1f1b18] p-5 text-[#f8f3eb] shadow-[6px_6px_0_#ff8f67]">
-                      <div className="flex items-center justify-between text-sm text-[#d6cdc3]">
-                        <span>Projected score</span>
-                        <span>+110 this month</span>
-                      </div>
-                      <div className="mt-4 flex items-end justify-between gap-3">
-                        <div>
-                          <p className="[font-family:var(--font-display)] text-7xl leading-none text-[#d7ff79]">
-                            1510
-                          </p>
-                          <p className="mt-3 text-sm text-[#d6cdc3]">
-                            From weak area clustering to exact next-step drills.
-                          </p>
-                        </div>
-                        <div className="rounded-[1.25rem] bg-white/10 px-3 py-2 text-right text-xs font-semibold uppercase tracking-[0.24em] text-[#f7eee3]">
-                          97th percentile
-                        </div>
-                      </div>
-                      <div className="mt-6 h-3 overflow-hidden rounded-full bg-white/10">
-                        <div className="progress-stripe h-full w-[86%] rounded-full bg-[#d7ff79]" />
-                      </div>
-                    </div>
-
-                    <div className="grid gap-4">
-                      <div className="rounded-[1.5rem] border border-[#1f1b18]/15 bg-white p-4 shadow-[0_18px_45px_rgba(31,27,24,0.08)]">
-                        <div className="mb-3 flex items-center justify-between">
-                          <p className="text-sm font-semibold text-[#4a433d]">Skill pulse</p>
-                          <Target className="h-4 w-4 text-[#ff8f67]" />
-                        </div>
-                        <div className="space-y-3">
-                          {[
-                            ["Algebra", "92%", "w-[92%]", "bg-[#d7ff79]"],
-                            ["Inference", "78%", "w-[78%]", "bg-[#95d7ff]"],
-                            ["Advanced vocab", "68%", "w-[68%]", "bg-[#ffb480]"],
-                          ].map(([label, value, width, tone]) => (
-                            <div key={label}>
-                              <div className="mb-1 flex items-center justify-between text-sm text-[#4d4641]">
-                                <span>{label}</span>
-                                <span className="font-semibold">{value}</span>
-                              </div>
-                              <div className="h-2 overflow-hidden rounded-full bg-[#f0e7db]">
-                                <div className={`${width} ${tone} h-full rounded-full`} />
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="rounded-[1.5rem] border border-[#1f1b18]/15 bg-[#d9f0ff] p-4">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-sm font-semibold text-[#35526a]">Leaderboard lift</p>
-                            <p className="mt-1 [font-family:var(--font-display)] text-4xl text-[#171412]">#12</p>
-                          </div>
-                          <Trophy className="h-10 w-10 text-[#35526a]" />
-                        </div>
-                        <p className="mt-3 text-sm leading-6 text-[#35526a]">
-                          Friendly competition adds pressure in the right places without making the
-                          product feel heavy.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 grid gap-4 sm:grid-cols-3">
-                    <div className="rounded-[1.35rem] border border-[#1f1b18]/15 bg-[#fff0e7] p-4">
-                      <p className="text-sm font-semibold text-[#5c4d45]">Reading timing</p>
-                      <p className="mt-1 [font-family:var(--font-display)] text-4xl">-12m</p>
-                    </div>
-                    <div className="rounded-[1.35rem] border border-[#1f1b18]/15 bg-[#eef8c4] p-4">
-                      <p className="text-sm font-semibold text-[#4d5331]">Streak</p>
-                      <p className="mt-1 [font-family:var(--font-display)] text-4xl">18 days</p>
-                    </div>
-                    <div className="rounded-[1.35rem] border border-[#1f1b18]/15 bg-white p-4">
-                      <p className="text-sm font-semibold text-[#5c4d45]">Recommended next</p>
-                      <p className="mt-1 text-base font-semibold">Vocabulary set 07 + Math drill</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="sticker absolute -left-4 top-6 hidden rotate-[-8deg] bg-[#ffcfbe] text-[#4b342a] lg:inline-flex">
-                Tiny moments of delight, not clutter.
-              </div>
-              <div className="sticker absolute -bottom-4 right-5 hidden rotate-[7deg] bg-[#d7ff79] text-[#273113] lg:inline-flex">
-                Built to feel smooth on day one.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y border-[#1f1b18]/10 bg-[#1f1b18] py-4 text-[#f8f3eb]">
-          <div className="marquee-track">
-            {Array.from({ length: 2 }).map((_, i) => (
-              <div key={i} className="marquee-group">
-                {[
-                  "full digital SAT simulations",
-                  "topic-level analytics",
-                  "leaderboards with momentum",
-                  "review that feels guided",
-                  "vocabulary loops that stick",
-                ].map((item) => (
-                  <span key={`${i}-${item}`} className="marquee-pill">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="features" className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-12 max-w-3xl">
-              <p className="section-kicker">The suite</p>
-              <h2 className="mt-3 [font-family:var(--font-display)] text-5xl leading-tight sm:text-6xl">
-                Serious SAT tools wrapped in a playful editorial system.
-              </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#4f4742]">
-                The page is built around contrast: tactile, bright, inviting surfaces up front and
-                sharp, high-signal academic utility underneath.
-              </p>
-            </div>
-
-            <div className="grid gap-6 lg:grid-cols-3">
-              {productHighlights.map((item, index) => (
-                <article
-                  key={item.title}
-                  className={`feature-panel relative overflow-hidden rounded-[2rem] border-2 border-[#1f1b18] bg-[#fffaf3] p-7 shadow-[8px_8px_0_#1f1b18] transition duration-300 hover:-translate-y-2 ${
-                    index === 1 ? "lg:translate-y-10" : ""
-                  }`}
-                >
-                  <div className={`absolute inset-x-0 top-0 h-2 bg-gradient-to-r ${item.tone}`} />
-                  <div className="mb-10 inline-flex h-14 w-14 items-center justify-center rounded-[1.2rem] border-2 border-[#1f1b18] bg-white shadow-[4px_4px_0_#1f1b18]">
-                    <item.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="max-w-xs [font-family:var(--font-display)] text-4xl leading-none">
-                    {item.title}
-                  </h3>
-                  <p className="mt-5 text-base leading-7 text-[#514943]">{item.description}</p>
-                  <div className="mt-8 rounded-[1.5rem] border border-[#1f1b18]/12 bg-[#f4ecdf] p-4 text-sm leading-6 text-[#564f49]">
-                    <div className="mb-3 flex items-center gap-2 font-semibold text-[#2d2825]">
-                      <Layers3 className="h-4 w-4" />
-                      Why it lands
-                    </div>
-                    Students can move from quick daily work to full-length pressure testing without
-                    ever leaving the same visual language.
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="mt-16 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="rounded-[2.2rem] border-2 border-[#1f1b18] bg-[#1f1b18] p-8 text-[#f8f3eb] shadow-[10px_10px_0_#ff8f67]">
-                <p className="section-kicker text-[#f8f3eb]/70">Everything students touch</p>
-                <h3 className="mt-3 max-w-xl [font-family:var(--font-display)] text-5xl leading-tight">
-                  One dashboard, many routes to confidence.
-                </h3>
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {suiteCards.map((card) => (
-                    <div key={card.title} className="rounded-[1.4rem] border border-white/10 bg-white/[0.06] p-4">
-                      <card.icon className="h-5 w-5 text-[#d7ff79]" />
-                      <p className="mt-4 text-lg font-semibold">{card.title}</p>
-                      <p className="mt-2 text-sm leading-6 text-[#d6cdc3]">{card.text}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                {metrics.map((metric, index) => (
-                  <div
-                    key={metric.label}
-                    className={`rounded-[1.8rem] border-2 border-[#1f1b18] p-6 shadow-[8px_8px_0_#1f1b18] ${
-                      index === 0 ? "bg-[#d7ff79]" : index === 1 ? "bg-[#d9f0ff]" : "bg-[#ffcfbe]"
-                    }`}
-                  >
-                    <p className="[font-family:var(--font-display)] text-6xl leading-none">{metric.value}</p>
-                    <p className="mt-3 max-w-xs text-base font-semibold leading-7 text-[#3d3733]">
-                      {metric.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="how-it-works" className="px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
-          <div className="mx-auto max-w-7xl rounded-[2.5rem] border-2 border-[#1f1b18] bg-[#fffaf3] p-8 shadow-[12px_12px_0_#1f1b18] sm:p-10 lg:p-14">
-            <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-              <div>
-                <p className="section-kicker">How it works</p>
-                <h2 className="mt-3 [font-family:var(--font-display)] text-5xl leading-tight">
-                  Built to keep students moving, not second-guessing.
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-[#4f4742]">
-                  The interface is fast to read and easy to trust. Every section points toward the
-                  next useful action.
-                </p>
-              </div>
-
-              <div className="grid gap-5">
-                {workflow.map((step, index) => (
-                  <div
-                    key={step.title}
-                    className="relative rounded-[1.7rem] border border-[#1f1b18]/12 bg-[#f5ede2] p-6 pl-20"
-                  >
-                    <div className="absolute left-6 top-6 flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#1f1b18] bg-white font-bold shadow-[4px_4px_0_#1f1b18]">
-                      {index + 1}
-                    </div>
-                    <step.icon className="mb-3 h-5 w-5 text-[#ff8f67]" />
-                    <h3 className="text-2xl font-semibold text-[#1f1b18]">{step.title}</h3>
-                    <p className="mt-2 max-w-2xl text-base leading-7 text-[#524a44]">{step.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="results" className="px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
-          <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.78fr_1.22fr]">
-            <div className="rounded-[2.2rem] border-2 border-[#1f1b18] bg-[#d9f0ff] p-8 shadow-[10px_10px_0_#1f1b18]">
-              <p className="section-kicker text-[#35526a]">What makes it memorable</p>
-              <h2 className="mt-3 [font-family:var(--font-display)] text-5xl leading-tight">
-                It feels like a study desk turned into software.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-[#35526a]">
-                Paper-like warmth, stickers, marker accents, and strong information hierarchy make
-                the product stand apart from sterile edtech pages.
-              </p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              {testimonials.map((item, index) => (
-                <article
-                  key={item.quote}
-                  className={`rounded-[1.9rem] border-2 border-[#1f1b18] p-6 shadow-[8px_8px_0_#1f1b18] ${
-                    index % 2 === 0 ? "bg-[#fffaf3]" : "bg-[#fff0e7]"
-                  }`}
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#756a64]">{item.label}</p>
-                  <p className="mt-4 [font-family:var(--font-display)] text-3xl leading-tight">{item.quote}</p>
-                  <p className="mt-4 text-base leading-7 text-[#4f4742]">{item.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
-          <div className="mx-auto max-w-7xl rounded-[2.7rem] border-2 border-[#1f1b18] bg-[#1f1b18] px-8 py-10 text-[#f8f3eb] shadow-[12px_12px_0_#d7ff79] sm:px-10 sm:py-12 lg:px-14 lg:py-16">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-              <div>
-                <p className="section-kicker text-[#f8f3eb]/70">Launch-ready homepage</p>
-                <h2 className="mt-3 max-w-3xl [font-family:var(--font-display)] text-5xl leading-tight sm:text-6xl">
-                  Turn SAT prep into a place students want to come back to tomorrow.
-                </h2>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-[#d9cec1]">
-                  Ronan SAT combines realistic testing, intelligent analysis, and playful momentum
-                  into one polished experience. The homepage now sells that story clearly.
-                </p>
-              </div>
-              <Link
-                href="https://learn.ronansat.com/auth"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#f8f3eb] bg-[#ff8f67] px-7 py-4 text-base font-bold text-[#171412] shadow-[6px_6px_0_#f8f3eb] transition hover:-translate-y-1 hover:shadow-[8px_8px_0_#f8f3eb]"
-              >
-                Launch free account
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-        </section>
+    <div className="min-h-screen bg-[#f4efe6] selection:bg-[#D9FF42] selection:text-[#0f0e0e]">
+      <NavBar />
+      <main>
+        <HeroSection />
+        <MarqueeSection />
+        <BentoFeatures />
+        <FlashcardDemo />
+        <CTASection />
       </main>
-
-      <footer className="px-4 pb-10 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 border-t border-[#1f1b18]/10 pt-6 text-sm text-[#5f5550] sm:flex-row sm:items-center sm:justify-between">
-          <p>Ronan SAT. Modern prep with personality.</p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="#features">Features</Link>
-            <Link href="#how-it-works">How it works</Link>
-            <Link href="https://learn.ronansat.com/auth">Get started</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

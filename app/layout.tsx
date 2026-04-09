@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { Calistoga, Work_Sans } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 
-const displayFont = Calistoga({
+const displayFont = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const bodyFont = Work_Sans({
+const bodyFont = DM_Sans({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Ronan SAT | Playful SAT Prep With Serious Results",
-  description:
-    "Ronan SAT blends realistic test simulations, smart review, dashboards, leaderboards, and vocabulary training into a polished study suite built to make SAT prep feel intuitive.",
+  title: "Ronan SAT | Break Your Score Ceiling",
+  description: "The most intuitive, beautifully designed SAT study suite on the internet.",
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
+      <body className={`${displayFont.variable} ${bodyFont.variable} antialiased bg-[#f4efe6] text-[#0f0e0e] selection:bg-[#D9FF42] selection:text-[#0f0e0e]`}>
         {children}
         <Analytics />
       </body>
